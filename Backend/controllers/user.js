@@ -39,7 +39,7 @@ exports.signup = (req, res) => {
 //login pour s'authentifier
 exports.login = (req, res, next) => {
   const email = req.body.email;
-
+  console.log(email);
   // chercher dans la base de donnée si l'utilisateur est bien présent
   mysqlconnection.query(
     "SELECT * FROM profil WHERE email = ? ",
@@ -51,7 +51,7 @@ exports.login = (req, res, next) => {
         // si l'email de l'utilisateur n'est pas présent dans la base de données
         if (results == 0) {
           return res
-            .status(404)
+            .status(500)
             .json({ error: "utilisateur inexsistant dans la base de données" });
         }
         // Controler la validité du password envoyer par le front

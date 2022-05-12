@@ -15,11 +15,12 @@ const userRoutes = require("./routes/user");
 const ficheUserRoutes = require("./routes/ficheUser");
 //importation de node.js utilitaires pour tavailler avec les chemins de fichiers et de répertoires
 const path = require("path");
+const CORS = require ("cors")
 require("dotenv").config();
 
 //pour créer une application express
 const app = express();
-
+app.use(CORS())
 const limiter = rateLimit({
   windowMs: 15 * 60 * 1000, // 15 minutes
   max: 100,
