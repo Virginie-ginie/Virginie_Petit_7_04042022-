@@ -21,7 +21,7 @@ const normalizePort = (val) => {
   };
 
 //la fonction normalizePort renvoie un port valide, qu'il soit fourni sous la forme d'un numéro ou d'une chaîne ;
-const port = normalizePort(process.env.PORT || "3000");
+const port = normalizePort(process.env.PORT || "5000");
 app.set("port", port);
 
 //la fonction errorHandler  recherche les différentes erreurs et les gère de manière appropriée. Elle est ensuite enregistrée dans le serveur ;

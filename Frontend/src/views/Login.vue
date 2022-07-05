@@ -9,7 +9,7 @@
       <input v-model="email" class="form-row__input" type="text" placeholder="Adresse mail"/>
     </div>
     <div class="form-row" v-if="model == 'create'">
-      <input v-model="username" class="form-row__input" type="text" placeholder="Username"/>
+      <input v-model="name" class="form-row__input" type="text" placeholder="name"/>
     </div>
     <div class="form-row">
       <input v-model="password" class="form-row__input" type="password" placeholder="Mot de passe"/>
@@ -42,7 +42,7 @@ export default {
     return {
       model: 'login',
       email: '',
-      username: '',
+      name: '',
       password: '',
     }
   },
@@ -55,7 +55,7 @@ export default {
   computed: {
     validatedFields: function () {
       if (this.model == 'create') {
-        if (this.email != "" && this.username != "" && this.password != "") {
+        if (this.email != "" && this.name != "" && this.password != "") {
           return true;
         } else {
           return false;
@@ -93,7 +93,7 @@ export default {
       const self = this;
       this.$store.dispatch('createAccount', {
         email: this.email,
-        username: this.username,
+        name: this.name,
         password: this.password,
       }).then(function () {
         self.login();

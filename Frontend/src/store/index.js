@@ -1,9 +1,10 @@
+
 import { createStore } from 'vuex'
 
 const axios = require('axios');
 
 const instance = axios.create({
-  baseURL: 'http://localhost:3000/api'
+  baseURL: 'http://localhost:5000/api'
 });''
 
 let user = localStorage.getItem('user');
@@ -24,7 +25,7 @@ if (!user) {
   }
 }
 
-// Create a new store instance.
+// Créez une nouvelle instance
 const store = createStore({
   state: {
     status: '',

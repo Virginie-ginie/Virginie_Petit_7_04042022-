@@ -1,42 +1,193 @@
 <template>
-  <div class="card">
-    <h1 class="card__title">Espace Perso</h1>
-    <p class="card__subtitle">Voilà donc qui je suis...</p>
-    <p>{{user.prenom}} {{user.nom}} {{user.email}}</p>
-    <img :src="user.photo"/>
-    <div class="form-row">
-      <button @click="logout()" class="button">
-        Déconnexion
-      </button>
+  <main>
+    <div class="BoutonDisconect">
+      <Disconect />
+      <p>
+        <small>
+          Bienvenue  😃
+          <router-link class="redirection-messages" to="/messages"
+            ><span class="message">Les Messages</span>
+          </router-link>
+        </small>
+      </p>
     </div>
-  </div>
+    <div class="container1">
+      <br />
+      <br />
+      <br />
+      <div class="titre-bienvenue">Coucou !!!  😃 </div>
+      <div  class="infos" @click.prevent="SendProfil">
+        <span class="email"> Email :</span> {{ member.email }}<br/>
+      </div>
+      <br />
+      <!-- le profil administrateur ne s'affiche que si la personne connectée est admin -->
+      <p>
+        <button @click.prevent="SupProfile" type="submit" class="btn-supcompte">
+          Supprimer le compte
+        </button>
+      </p>
+      <Footer />
+    </div>
+  </main>
 </template>
 
 <script>
-import { mapState } from 'vuex'
+import Disconect from "@/components/Deconnection.vue"; //j'appel ma fonction déconnexion
+import Footer from "@/components/Footer.vue";
+import Logo from "@/components/Logo.vue";
+import axios from "axios";
+
 export default {
-  name: 'Profile',
-  mounted: function () {
-    console.log(this.$store.state.user);
-    if (this.$store.state.user.userId == -1) {
-      this.$router.push('/');
-      return ;
-    }
-    this.$store.dispatch('getUserInfos');
+  name: "PageProfil",
+  components: { Disconect, Footer, Logo },
+  data() {
+    return {
+      messages: [],
+      member: [], //je récupère les infos de la personnes connectée
+    };
   },
-  computed: {
-    ...mapState({
-      user: 'userInfos',
-    })
+
+  mounted() {
+   let user = JSON.parse(window.localStorage.getItem("user"));
+    this.member = user;
   },
-  methods: {
-    logout: function () {
-      this.$store.commit('logout');
-      this.$router.push('/');
-    }
+methods: {
+  SendProfil(userId){
+    // je récupère les données du profil connecté
+    
+    let user = JSON.parse(window.localStorage.getItem("user"));
+     this.member = user;
+    axios
+      .get("http://localhost:5000/api/profile/" + userId, {
+
+        headers: {
+          Authorization: "Bearer " + user["token"], //je récupère la clé présent dans le local storage
+        },
+      })
+
+      .then((response) => {
+        console.log("réponse API", response);
+        this.messages = response.data;
+      })
+      .catch((error) => console.log(error));
+  },
+  
+    SupProfile(id,userIdOrder ) {
+      let user = JSON.parse(window.localStorage.getItem("user"));
+       this.member = user;
+      //me permet de supprimer un profil au click
+      if (window.confirm("Voulez vous vraiment supprimer votre compte?"))
+        axios
+          .delete(`http://localhost:5000/api/fiche_user`, {
+             data: { userIdOrder }, //je récupère les éléments que je souhaite poster
+            headers: {
+              Authorization: "Bearer " + user["token"], //je récupère la clé présent dans le local storage
+            },
+          })
+
+          .then(() => {
+            localStorage.clear();
+            document.location.href = "http://localhost:3000";
+          })
+          .catch((error) => console.log(error));
+    },
   }
-}
+};
+
 </script>
 
 <style scoped>
-</style>>
+.cacher {
+  /*je cache le texte du bouton pour WAVE*/
+  display: none;
+}
+
+.titre-bienvenue{
+    margin-bottom: 50px;
+    font-size: 21px;
+    margin-left: 100px;
+}
+
+.infos {
+  margin-top: 10px;
+}
+img {
+  width: 240px;
+  height: 50px;
+}
+
+.photoprofil {
+  height: 200px;
+  width: 200px;
+}
+
+main {
+  background-color: whitesmoke;
+  background-image: url("../assets/logo.png");
+  background-position: center;
+  margin: auto;
+  justify-content: center;
+  height: 600px;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+span {
+  font-weight: bold;
+  margin-left: 10px;
+}
+
+.BoutonDisconect {
+  position: absolute;
+  right: 12px;
+  top: 1px;
+}
+
+.btn-supcompte {
+  padding: 5px;
+  font-size: 15px;
+  background: linear-gradient(#9356dc, #f26896);
+  text-decoration: none;
+  color: white;
+  border: 0px solid;
+  border-radius: 20px;
+  cursor: pointer;
+  margin-left: 113px;
+  margin-bottom: 146px;
+  margin-top: 150px;
+}
+
+.btn-supcompte:hover {
+  opacity: 0.8;
+  background: linear-gradient(black, red);
+  text-shadow: 2px 2px 2px black;
+  box-shadow: 2px 2px 2px black;
+  transition-duration: 0.15s;
+}
+
+Footer {
+  top: 331px;
+}
+
+@media (max-width: 767px) {
+  .redirection-message {
+    position: static;
+  }
+
+  .BoutonDisconect {
+    position: static;
+  }
+
+  Footer {
+    position: fixed;
+    left: 0px;
+    bottom: 0px;
+    width: 90%;
+  }
+}
+</style>
+
+
+
+
+
+

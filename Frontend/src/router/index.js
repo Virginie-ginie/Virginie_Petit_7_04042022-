@@ -1,6 +1,7 @@
 import { createWebHistory, createRouter } from "vue-router";
 import Login from "@/views/Login.vue";
 import Profile from "@/views/Profile.vue";
+import Messages from"@/views/Messages.vue";
 
 const routes = [
   { 
@@ -14,6 +15,12 @@ const routes = [
     component: Profile, 
     props:true 
   },
+
+{
+  name:'messages',
+  path:'/messages',
+  component: Messages,
+}
 ]
 
 const router = createRouter({

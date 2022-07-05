@@ -2,9 +2,10 @@
 const bcrypt = require("bcrypt");
 
 class User {
-  constructor(email, password) {
+  constructor(email, password,name) {
     this.email = email;
     this.password = password;
+    this.name = name;
   }
   //méthode pour hasher le mot de passe
   hashPassword = async function () {

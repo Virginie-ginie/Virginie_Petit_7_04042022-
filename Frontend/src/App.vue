@@ -1,8 +1,11 @@
 <template>
-<div>
+<main>
+  
+<div> 
   <img class="logo" alt="Vue logo" src="./assets/logo.png" />
   <router-view> </router-view>
 </div>
+</main>
 </template>
 
 <script>

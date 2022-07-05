@@ -20,11 +20,11 @@ router.post("/",authentification, multer, ficheUser.createFicheUser );
 
 router.get("/",authentification,ficheUser.readAllFicheUser);
 
-router.get("/:id",authentification, ficheUser.readOneFicheUser);
+// router.get("/:id",authentification, ficheUser.readOneFicheUser);
  
-router.put("/:id",authentification, multer, ficheUser.updateOneFicheUser);
+// router.put("/:id",authentification, multer, ficheUser.updateOneFicheUser);
 
-router.delete("/:id",authentification,ficheUser.deleteOneFicheUser);
+router.delete("/",authentification,ficheUser.deleteOneFicheUser);
 
 
 

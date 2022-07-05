@@ -13,10 +13,14 @@ const mysql = require("./config/db-config");
 //importation des routes
 const userRoutes = require("./routes/user");
 const ficheUserRoutes = require("./routes/ficheUser");
+const messagesRoutes = require("./routes/messages")
+
 //importation de node.js utilitaires pour tavailler avec les chemins de fichiers et de répertoires
 const path = require("path");
 const CORS = require ("cors")
 require("dotenv").config();
+
+
 
 //pour créer une application express
 const app = express();
@@ -37,7 +41,9 @@ app.use(morgan("dev"));
 
 // on intercepte toutes les requetes qui continenne du JSON et
 // met a disposition le continu de la requet ds req.body
+app.use(express.urlencoded());
 app.use(express.json());
+
 
 //La méthode app.use() vous permet d'attribuer un middleware à une route spécifique de votre application.
 
@@ -64,8 +70,14 @@ app.use("/api/authentification", userRoutes);
 //la route du profil
 app.use("/api/fiche_user", ficheUserRoutes);
 
+// Le route pour les messages
+app.use("/api/messages",messagesRoutes);
+
+
+
 //le route pour accéder aux images du dossier images
 app.use("/images", express.static(path.join(__dirname, "images")));
+
 
 //exportation de app.js pour pouvoir y accéser depuis un autre fichier
 module.exports = app;
