@@ -93,4 +93,12 @@ img {
     cursor:not-allowed;
     background:#cecece;
   }
+
+  @media only screen and (min-width:320px) and (max-width:767px) {
+
+  .logo{
+    margin-left: 0;
+  }
+
+}
 </style>

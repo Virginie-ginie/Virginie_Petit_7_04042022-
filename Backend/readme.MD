@@ -26,3 +26,8 @@ Pour lancer le serveur:  `$ npm run start`
 # Frontend
 
 Pour lancer le serveur `$ npm run serve`
+
+# identifiant admin 
+
+identifiant : admin@admin.fr
+mot de passe: Admin123

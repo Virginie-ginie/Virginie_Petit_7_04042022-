@@ -3,10 +3,10 @@
     <div class="BoutonDisconect">
       <Disconect />
       <p>
-        <small>
+        <small class="bienvenue">
           Bienvenue  😃
           <router-link class="redirection-messages" to="/messages"
-            ><span class="message">Les Messages</span>
+            ><div class="message">Les Messages</div>
           </router-link>
         </small>
       </p>
@@ -15,9 +15,11 @@
       <br />
       <br />
       <br />
-      <div class="titre-bienvenue">Coucou !!!  😃 </div>
+      <div class="titre-bienvenue">Coucou {{ member.name }} !!!  😃 </div>
       <div  class="infos" @click.prevent="SendProfil">
+        <span class="name"> Nom:</span> {{ member.name }}<br>
         <span class="email"> Email :</span> {{ member.email }}<br/>
+
       </div>
       <br />
       <!-- le profil administrateur ne s'affiche que si la personne connectée est admin -->
@@ -168,8 +170,51 @@ Footer {
   top: 331px;
 }
 
-@media (max-width: 767px) {
-  .redirection-message {
+@media only screen and (min-width:320px) and (max-width:767px) {
+
+
+.message,.bienvenue,.BoutonDisconect{
+font-size: 15px;
+margin-left: 28px;
+}
+.titre-bienvenue{
+  margin-left: 30px;
+}
+
+
+
+  Footer {
+    position: absolute;
+    left: 0px;
+    bottom: 0px;
+    width: 100%;
+    top:888px
+  }
+}
+
+@media screen and (min-width:768px) and (max-width:1023px) {
+
+main{
+   width: 665px;
+}
+
+.message,.bienvenue,.BoutonDisconect{
+font-size: 15px;
+margin-left: 28px;
+}
+.titre-bienvenue{
+  margin-left: 185px;
+}
+
+.infos{
+  margin-left: 185px;
+  font-size: 20px;
+}
+
+.btn-supcompte{
+  margin-left: 185px;
+}
+.redirection-message {
     position: static;
   }
 
@@ -181,8 +226,10 @@ Footer {
     position: fixed;
     left: 0px;
     bottom: 0px;
-    width: 90%;
+    width: 100%;
+    top:930px
   }
+
 }
 </style>
 

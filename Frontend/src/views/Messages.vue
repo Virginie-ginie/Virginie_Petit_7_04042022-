@@ -11,11 +11,7 @@
             Bienvenue {{ member.name }} 😃
             <router-link class="redirection-profil" to="/profile">
               <p v-if="member.attachment">
-                <img
-                  class="photoprofil"
-                  :src="member.attachment"
-                  alt="..."
-                />
+                <img class="photoprofil" :src="member.attachment" alt="..." />
               </p>
               <p class="profilsansphoto" v-else>Mon profil</p>
             </router-link>
@@ -35,10 +31,10 @@
           <textarea
             id="inputContent"
             v-model="dataMessage.content"
-            style="height: 100px; margin-top:-10px"
+            style="height: 100px; margin-top: -10px"
           ></textarea>
         </div>
-       
+
         <div class="btn-upload">
           <input
             name="inputFile"
@@ -56,40 +52,38 @@
       <div class="container2">
         <div class="test">
           <h3>Fil d'actualité</h3>
-          
+
           <ul id="example-1">
-            <li v-for="item in messages" :key="item.id">
-            <div>utilisateur : {{ item.name}}</div>
+            <li class="post-container" v-for="item in messages" :key="item.id">
+              <div> {{ item.name }}</div>
               <span>{{ item.title }}<br /></span>
-              <!--<p v-if="item.userid.attachementuser"> <img class="photoprofil" :src="item.userid.attachementuser" alt="..."  /><br></p>
-      <i>Publié par <strong>{{ item.userid.username }}</strong> le {{item.createdAt.split('T')[0]}} à {{item.createdAt.slice(11,16)}}<br><br></i> -->
               <div class="contenu">{{ item.content }} <br /></div>
-              <p v-if="item.attachment">
+              <div v-if="item.attachment">
                 <img class="image" :src="item.attachment" alt="..." />
-              </p>
+              </div>
               <!-- j'affiche l'image uniquement si il y en a une-->
-              <p>
-                <button v-if="item.UserId == member.userId || member.isAdmin"
+              <div class="bottom-post-container">
+                <button
+                  v-if="item.UserId == member.userId || member.isAdmin"
                   @click.prevent="DeleMessage(item.idpublication, item.userId)"
                   id="supprimer"
                   type="submit"
-                   class="supp">
-
+                  class="supp"
+                >
                   <span class="supprimer">Supprimer</span>
-                   <i class="fas fa-trash-alt"></i>
+                  <i class="fas fa-trash-alt"></i>
                 </button>
-              </p>
+                <textarea
+                  type="text"
+                  id="comment"
+                  name="comment"
+                  class="form-control"
+                  v-model="dataComment.content"
+                  placeholder="Insérer votre commentaire..."
+                ></textarea>
+              </div>
               <!--le bouton Supprimer s'affiche uniquement si la personne connectée est la personne qui a publié le message ou un admin-->
               <!--partie création commentaire -->
-
-              <textarea
-                type="text"
-                id="comment"
-                name="comment"
-                class="form-control"
-                v-model="dataComment.content"
-                placeholder="Insérer votre commentaire..."
-              ></textarea>
             </li>
           </ul>
         </div>
@@ -167,8 +161,7 @@ export default {
           })
           .then((response) => {
             console.log(response);
-             window.location.reload();
-           
+            window.location.reload();
           })
           .catch((error) => console.log(error));
       } else {
@@ -206,15 +199,24 @@ export default {
 <style scoped>
 .h3 {
   margin-left: 20px;
+  margin-bottom:20px;
 }
-.supprimer{
-  font-size:10px;
+.supprimer {
+  font-size: 10px;
+}
+.bottom-post-container{
+  display: flex;
+  flex-direction: row;
+  height: 60px;
+  align-items: center;
+  justify-content: space-between;
+
 }
 
-.image{
+.image {
   width: 10px;
 }
-#supprimer{
+#supprimer {
   padding: 5px;
   font-size: 15px;
   background: linear-gradient(#9356dc, #f26896);
@@ -226,16 +228,23 @@ export default {
 }
 .container1 {
   /*contient les inputs*/
+  display: flex;
+  flex-direction: column;
+  align-items: center;
   background-color: #f2f2f2; /*rgba(255,192,203,0.5);*/
   font-family: Arial, Helvetica, sans-serif;
   border: 2px solid none;
   border-radius: 8px;
   box-shadow: 1px 1px 2px #555;
   width: 800px;
+  padding:30px;
+  margin-bottom:30px;
 }
+
 
 .container1 .photoprofil {
   /*photo profil de la page profil perso*/
+
   height: 50px;
   width: 50px;
   border-radius: 50px;
@@ -307,10 +316,13 @@ span {
   list-style: none;
   font-family: Arial, Helvetica, sans-serif;
   width: 60%;
-  height: 180px;
 }
-
-
+.post-container {
+  display: flex;
+  flex-direction: column;
+  padding: 30px;
+  row-gap:17px ;
+}
 .container1 img {
   /*logo principal*/
   width: 250px;
@@ -321,12 +333,11 @@ span {
 
 .container2 img {
   /*image publié par les utilisateurs */
-    margin-left: 358px;
-    width: 113px;
-    height: 105px;
-    border: 2px solid none;
-    border-radius: 20px;
-    margin-top: -72px;
+  object-fit: cover;
+  width: 100%;
+  height: 300px;
+  border: 2px solid none;
+  border-radius: 20px;
 }
 
 small {
@@ -336,7 +347,6 @@ small {
   top: 26px;
 }
 
-
 #inputContent,
 #inputTitle,
 textarea {
@@ -345,11 +355,9 @@ textarea {
   border: none;
   outline: none;
   box-shadow: 1px 1px 1px black;
-  width: 370px;
-  margin-left: 93px;
+  width: 330px;
   height: 40px;
-  margin-bottom: 15px;
-  margin-top:-46px;
+  margin-right: 0;
 }
 
 .btnpublier {
@@ -366,8 +374,8 @@ textarea {
   border-radius: 20px;
   cursor: pointer;
 }
-.supprimer:hover{
-   opacity: 0.8;
+.supprimer:hover {
+  opacity: 0.8;
   background: linear-gradient(black, red);
   text-shadow: 2px 2px 2px black;
   box-shadow: 2px 2px 2px black;
@@ -387,8 +395,14 @@ textarea {
   margin-left: 10px;
 }
 
-@media (max-width: 767px) {
-  .container1 img {
+
+
+@media only screen and (min-width:320px) and (max-width:767px){
+
+.container1 {
+    width: 320px;
+  }
+.container1 img {
     width: 250px;
     height: 50px;
     position: static;
@@ -400,7 +414,16 @@ textarea {
     border: 2px solid none;
     border-radius: 20px;
   }
-
+  #inputContent{
+    width: 295px;;
+  }
+  #inputTitle{
+    width: 295px;
+  }
+ #supprimer{
+  margin-right: 15px;
+  margin-left: -20px;
+}
   .test li {
     width: 100%;
   }
@@ -409,17 +432,28 @@ textarea {
     position: static;
   }
 
-  .BoutonDisconect {
-    position: static;
-  }
-
-  small {
-    position: static;
-  }
+  .message,.bienvenue,.BoutonDisconect{
+font-size: 15px;
+margin-left: 28px;
+}
+.titre-bienvenue{
+  margin-left: 185px;
+}
 
   Footer {
-    width: 92%;
+    width: 100%;
   }
+}
+
+@media screen and (min-width:768px) and (max-width:1023px) {
+.container1{
+  width: 750px;
+}
+#supprimer{
+  margin-right: 15px;
+  margin-left: -20px;
+}
+  
 }
 </style>
 

@@ -27,7 +27,7 @@ const app = express();
 app.use(CORS())
 const limiter = rateLimit({
   windowMs: 15 * 60 * 1000, // 15 minutes
-  max: 100,
+  max: 1000,
 });
 
 app.use(limiter);
