@@ -51,11 +51,11 @@
       </div>
       <div class="container2">
         <div class="test">
-          <h3>Fil d'actualité</h3>
+          <h3 class="actualite">Fil d'actualité</h3>
 
           <ul id="example-1">
             <li class="post-container" v-for="item in messages" :key="item.id">
-              <div> {{ item.name }}</div>
+              <div class="nom-utilisateur"> {{ item.name }}</div>
               <span>{{ item.title }}<br /></span>
               <div class="contenu">{{ item.content }} <br /></div>
               <div v-if="item.attachment">
@@ -212,10 +212,19 @@ export default {
   justify-content: space-between;
 
 }
+.actualite{
+  margin-left: 20px;
+  margin-top:10px
+}
+.nom-utilisateur{
+  margin-top: -25px;
+}
+
 
 .image {
   width: 10px;
 }
+
 #supprimer {
   padding: 5px;
   font-size: 15px;

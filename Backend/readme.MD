@@ -1,7 +1,6 @@
 # base de données
 
-C:\Users\ASUS\Documents\dumps\Dump20220705 (2)
-
+My SQL
 # Logiciel utilisés
 
 Vue3
