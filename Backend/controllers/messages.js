@@ -62,24 +62,7 @@ exports.listMessage = (req, res, next) => {
     res.status(500).json({ error });
   }
 };
-//   return Promise.all(
-//     posts.map((post) => {
-//       mysqlconnection.query;
-//       ("SELECT * FROM publication WHERE publication = ?");
 
-//       const sqlParams = [publication.publicationId];
-//       return new Promise((resolve, reject) => {
-//         connection.excute(mysqlconnection,(error, comments, fields) => {
-//           if (error) {
-//             reject(error);
-//           } else {
-//             resolve({ ...post, comments });
-//           }
-//         });
-//       });
-//     })
-//   );
-// };
 
 //Supprimer un message
 
@@ -143,62 +126,10 @@ exports.listMessage = (req, res, next) => {
         })
       }
     };
-//     const idpublication = req.params.id
-//      // controle autorisation de la modification par l'userId
-//      if (userIdParamsUrl == results[0].profil.id) {
-//       console.log("Autorisation pour modification de l'objet");
-//     if (idpublication.userId !== req.auth.userId) {
-//       return res.status(403).json({
-//         error: error,
-//         message: "Vous n'êtes pas autorisé à effectuer cette action.",
-//       });
-//       }else{
-//     mysqlconnection.query ('DELETE FROM Publication WHERE idpublication = ?;',
-//     idpublication,)
-
-//     }
-
-//     const filename = idpublication.attachment.split("/images/")[1];
-//     fs.unlink(`images/${filename}`, async () => {
-//   try {
-//     //supprimer le message (fonction callback de unlink)
-//     await Message.deleteOne({ idpublication: req.params.id });
-//     return res
-//       .status(200)
-//       .json({ message: "Le message a été supprimée." });
-//   } catch (error) {
-//     return res.status(400).json({
-//       error: error,
-//       message: "Impossible de supprimer le message.",
-//     });
-//   }
-//   });
-// }}catch (error) {
-// return res
-//   .status(500)
-//   .json({ error: error, message: "Action impossible." });
-// }
-// };
 
 
 
 
 
 
-//      const idpublication = req.params.id
-//      console.log(idpublication);
-//     mysqlconnection.query ('DELETE FROM Publication WHERE idpublication = ?;', 
-//       idpublication,
-    
-//       (error, results) => {
-//         if (error) {
-//           res.json({ error });
-//         } else {
-//           res.json({ message: "message supprimé" });
-//         }
-//       }
-//     )
-//   } catch {
-//     return error;
-//   }
-// };
+
